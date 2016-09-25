@@ -1,36 +1,7 @@
 'use strict';
 
-const $l = {
-  byId: (id) =>
-    document.getElementById(id),
-  byName: (name) =>
-    document.getElementsByName(name)[0],
-  addOption: (select, textContent, value) => {
-    const elm = document.createElement('option');
-
-    elm.textContent = textContent;
-    elm.value = value;
-
-    select.appendChild(elm);
-  },
-};
-
-const refreshOptions = (select, list, textField) => {
-  select.innerHTML = "";
-
-  list.forEach((item) => $l.addOption(select, item[textField], item));
-};
-
-const refreshPatterns = (patterns) =>
-  refreshOptions(selects.patterns, patterns, 'name');
-
-const refreshQueryParameters = (queryParameters) =>
-  refreshOptions(selects.queryParameters, queryParameters, 'key');
-
-const selects = {
-  patterns: $l.byName('patterns'),
-  queryParameters: $l.byName('query_parameters'),
-};
+const storage = new Storage(chrome.storage.local);
+const $l = new DollarL();
 
 const inputs = {
   name: $l.byName('name'),
@@ -46,27 +17,28 @@ const buttons = {
   removePattern: $l.byId('remove_pattern'),
 }
 
-const patterns = [
-  new Pattern('Test1'),
-  new Pattern('Test2'),
-];
+const selects = {
+  patterns: $l.byName('patterns'),
+  queryParameters: $l.byName('query_parameters'),
+};
 
-refreshPatterns(patterns);
+const refreshPatterns = (patterns) =>
+  $l.refreshOptionsOnSelect(selects.patterns, patterns, 'name');
 
-const queryParameters = [
-  { key: 'Test3', value: 'Test4' },
-  { key: 'Test5', value: 'Test6' },
-];
-
-refreshQueryParameters(queryParameters);
+const refreshQueryParameters = (queryParameters) =>
+  $l.refreshOptionsOnSelect(selects.queryParameters, queryParameters, 'key');
 
 buttons.addPattern.addEventListener('click', () => {
   const name = inputs.name.value;
   const regex = inputs.regex.value;
 
-  patterns.push(new Pattern(name, regex, queryParameters));
+  const pattern = new Pattern(name, regex, queryParameters);
 
-  refreshPatterns(patterns);
+  storage.addPattern(pattern, () => {
+    storage.patterns((patterns) => {
+      refreshPatterns(patterns);
+    });
+  });
 });
 
 buttons.removePattern.addEventListener('click', () => {
@@ -84,4 +56,10 @@ buttons.addQueryParameter.addEventListener('click', () => {
 
 buttons.removeQueryParameter.addEventListener('click', () => {
   refreshQueryParameters(queryParameters);
+});
+
+const queryParameters = [];
+
+storage.patterns((details) => {
+  refreshPatterns(details);
 });
