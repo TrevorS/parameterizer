@@ -1,3 +1,10 @@
-body {
-  padding: 20px;
+.input-group > label {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+.input-group > select,
+.input-group > input {
+  margin-bottom: 5px;
 }
