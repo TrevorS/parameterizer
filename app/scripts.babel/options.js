@@ -34,15 +34,17 @@ buttons.addPattern.addEventListener('click', () => {
 
   const pattern = new Pattern(name, regex, queryParameters);
 
-  storage.addPattern(pattern, () => {
-    storage.patterns((patterns) => {
-      refreshPatterns(patterns);
-    });
+  storage.addPattern(pattern, (updatedPatterns) => {
+    refreshPatterns(updatedPatterns);
   });
 });
 
 buttons.removePattern.addEventListener('click', () => {
-  refreshPatterns(patterns);
+  const patternName = $l.getSelected(selects.patterns).text;
+
+  storage.removePattern(patternName, (updatedPatterns) => {
+    refreshPatterns(updatedPatterns);
+  });
 });
 
 buttons.addQueryParameter.addEventListener('click', () => {

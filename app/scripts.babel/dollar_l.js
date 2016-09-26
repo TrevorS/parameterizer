@@ -25,4 +25,8 @@ class DollarL {
 
     list.forEach((item) => this.addOptionToSelect(select, item[textField], item));
   }
+
+  getSelected(select) {
+    return select.options[select.selectedIndex];
+  }
 }

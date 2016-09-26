@@ -27,7 +27,9 @@ class Storage {
     this.patterns((patterns) => {
       const updatedPatterns = patterns.concat(pattern);
 
-      this.storageArea.set({ [KEYS.patterns]: updatedPatterns }, callback);
+      this.storageArea.set({ [KEYS.patterns]: updatedPatterns }, () => {
+        callback(updatedPatterns);
+      });
     });
   }
 
@@ -35,7 +37,9 @@ class Storage {
     this.patterns((patterns) => {
       const updatedPatterns = patterns.filter((pattern) => pattern.name !== patternName);
 
-      this.storageArea.set({ [KEYS.patterns]: updatedPatterns }, callback);
+      this.storageArea.set({ [KEYS.patterns]: updatedPatterns }, () => {
+        callback(updatedPatterns);
+      });
     });
   }
 }
