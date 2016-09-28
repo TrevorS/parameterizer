@@ -1,25 +1,24 @@
 'use strict';
 
+const storage = new Storage(chrome.storage.local);
+
 chrome.runtime.onInstalled.addListener((details) => {
   console.log('previousVersion', details.previousVersion);
 });
 
-chrome.browserAction.setBadgeText({text: '\'Allo'});
+const requestHandler = (_request) => {
+  const request = new Request(_request);
 
-console.log('\'Allo \'Allo! Event Page for Browser Action');
+  storage.patterns((patterns) => {
+    patterns.forEach((pattern) => {
+      if (request.matches(pattern.regex, pattern.queryParameters)) {
+        const newUrl = request.addQueryParameters(pattern.queryParameters);
 
-const requestHandler = (request) => {
-  // patterns.forEach((pattern) => {
-  //   if (request.url.match(pattern.regex)) {
-  //     // add the query parameter
-  //   }
-  // });
-
-  console.log('test');
-  console.log('request', request);
-	if (request.url === 'http://cnn.com/') {
-		console.log(request);
-	}
+        chrome.tabs.update(request.tabId, { url: newUrl.href });
+        chrome.browserAction.setBadgeText({ text: '!' });
+      }
+    });
+  });
 };
 
 chrome.webRequest.onBeforeRequest.addListener(requestHandler,
