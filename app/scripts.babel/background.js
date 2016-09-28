@@ -2,10 +2,6 @@
 
 const storage = new Storage(chrome.storage.local);
 
-chrome.runtime.onInstalled.addListener((details) => {
-  console.log('previousVersion', details.previousVersion);
-});
-
 const requestHandler = (_request) => {
   const request = new Request(_request);
 
