@@ -10,20 +10,19 @@
   "default_locale": "en",
   "background": {
     "scripts": [
+      "scripts/storage.js",
+      "scripts/request.js",
       "scripts/chromereload.js",
       "scripts/background.js"
     ]
   },
   "permissions": [
     "tabs",
-    "http://*/*",
-    "https://*/*",
     "background",
     "storage",
-    "webNavigation",
     "webRequest",
-    "*://*.google.com/",
-    "webRequestBlocking"
+    "webRequestBlocking",
+    "<all_urls>"
   ],
   "options_ui": {
     "page": "options.html",
