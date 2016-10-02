@@ -10,54 +10,60 @@
     <!-- endbuild -->
   </head>
   <body>
-    <h1>Pattern Configuration</h1>
+    <form>
+      <fieldset>
+        <legend>Patterns</legend>
+        <div class="input-collection">
+          <div>
+            <div class="input-group">
+              <label for="name">Name:</label>
+              <input id="name" type="text">
+            </div>
 
-    <div class="input-group">
-      <label for="patterns">Patterns</label>
-      <select multiple name="patterns">
-      </select>
-    </div>
+            <div class="input-group">
+              <label for="regex">Regex:</label>
+              <input id="regex" type="text">
+            </div>
 
-    <div class="input-group">
-      <label for="name">Name:</label>
-      <input type="text" name="name">
-    </div>
+            <div class="input-group input-group-buttons">
+              <button id="add_pattern" type="button">+</button>
+              <button id="remove_pattern" type="button">-</button>
+            </div>
+          </div>
 
-    <div class="input-group">
-      <label for="regex">Regex:</label>
-      <input type="text" name="regex">
-    </div>
+          <div>
+            <select id="patterns" size="9" class="input-list"></select>
+          </div>
+        </div>
+      </fieldset>
 
-    <div class="input-group">
-      <label for="key">Query Parameter Key:</label>
-      <input type="text" name="key">
-    </div>
+      <fieldset>
+        <legend>Query Parameters</legend>
+        <div class="input-collection">
 
-    <div class="input-group">
-      <label for="value">Query Parameter Value:</label>
-      <input type="text" name="value">
-    </div>
+          <div>
+            <div class="input-group">
+              <label for="key">Key:</label>
+              <input id="key" type="text">
+            </div>
 
-    <div class="input-group buttons">
-      <button id="add_query_parameter">Add Query Parameter</button>
-      <button id="remove_query_parameter">Remove Query Parameter</button>
-    </div>
+            <div class="input-group">
+              <label for="value">Value:</label>
+              <input id="value" type="text">
+            </div>
 
-    <div class="input-group">
-      <label for="query_parameters">Query Parameters:</label>
-      <select multiple name="query_parameters">
-      </select>
-    </div>
+            <div class="input-group input-group-buttons">
+              <button id="add_query_parameter" type="button">+</button>
+              <button id="remove_query_parameter" type="button">-</button>
+            </div>
+          </div>
 
-    <div class="input-group">
-      <label for="enabled">Enabled:</label>
-      <input type="checkbox" name="enabled">
-    </div>
-
-    <div class="input-group buttons">
-      <button id="add_pattern">Add Pattern</button>
-      <button id="remove_pattern">Remove Pattern</button>
-    </div>
+          <div>
+            <select id="query_parameters" size="9" class="input-list">
+          </div>
+        </div>
+      </fieldset>
+    </form>
 
     <!-- build:js scripts/options-vendor.js -->
     <!-- bower:js -->

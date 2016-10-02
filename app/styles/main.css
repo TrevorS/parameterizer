@@ -1,10 +1,52 @@
+body {
+  width: 650px;
+  overflow: hidden;
+}
+
+fieldset {
+  margin-bottom: 15px;
+  padding: 10px 20px;
+}
+
+legend {
+  font-size: 2em;
+}
+
+button {
+  font-weight: bold;
+  font-size: 1.5em;
+  width: 45px;
+}
+
 .input-group > label {
   display: block;
   margin-bottom: 3px;
   font-weight: bold;
+  font-size: 1.25em;
 }
 
 .input-group > select,
 .input-group > input {
   margin-bottom: 5px;
+  height: 20px;
+  font-size: 1.5em;
+  width: 75%;
+}
+
+.input-group-buttons {
+  margin-top: 10px;
+}
+
+.input-collection {
+  display: flex;
+}
+
+.input-collection > div {
+  width: 50%;
+}
+
+.input-list {
+  width: 100%;
+  height: 95%;
+  font-size: 1.5em;
 }
