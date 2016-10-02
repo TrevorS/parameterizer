@@ -4,10 +4,10 @@ const storage = new Storage(chrome.storage.local);
 const $l = new DollarL();
 
 const inputs = {
-  name: $l.byName('name'),
-  regex: $l.byName('regex'),
-  key: $l.byName('key'),
-  value: $l.byName('value'),
+  name: $l.byId('name'),
+  regex: $l.byId('regex'),
+  key: $l.byId('key'),
+  value: $l.byId('value'),
 };
 
 const buttons = {
@@ -18,8 +18,8 @@ const buttons = {
 }
 
 const selects = {
-  patterns: $l.byName('patterns'),
-  queryParameters: $l.byName('query_parameters'),
+  patterns: $l.byId('patterns'),
+  queryParameters: $l.byId('query_parameters'),
 };
 
 const refreshPatterns = (patterns) =>
