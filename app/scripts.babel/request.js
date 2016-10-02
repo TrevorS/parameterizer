@@ -9,7 +9,7 @@ class Request {
   }
 
   matches(regex, params) {
-    return this.url.href.match(regex) &&
+    return this.url.href.match(new RegExp(regex)) &&
            this.request.type === MAIN_FRAME &&
            this.requiresModification(params);
   }
