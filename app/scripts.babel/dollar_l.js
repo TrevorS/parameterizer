@@ -7,10 +7,6 @@ class DollarL {
     return this.document.getElementById(id);
   }
 
-  byName(name) {
-    return this.document.getElementsByName(name)[0];
-  }
-
   addOptionToSelect(select, textContent, value) {
     const elm = this.document.createElement('option');
 
