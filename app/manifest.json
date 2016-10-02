@@ -25,8 +25,7 @@
     "<all_urls>"
   ],
   "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
+    "page": "options.html"
   },
   "browser_action": {
     "default_icon": {
