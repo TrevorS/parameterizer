@@ -15,7 +15,7 @@ const buttons = {
   removeQueryParameter: $l.byId('remove_query_parameter'),
   addPattern: $l.byId('add_pattern'),
   removePattern: $l.byId('remove_pattern'),
-}
+};
 
 const selects = {
   patterns: $l.byId('patterns'),
@@ -58,6 +58,40 @@ buttons.addQueryParameter.addEventListener('click', () => {
 
 buttons.removeQueryParameter.addEventListener('click', () => {
   refreshQueryParameters(queryParameters);
+});
+
+selects.patterns.addEventListener('click', (event) => {
+  storage.patterns((patterns) => {
+    const pattern = patterns.find((pattern) =>
+      pattern.name === event.toElement.innerHTML);
+
+    if (!pattern) {
+      return;
+    }
+
+    inputs.name.value = pattern.name;
+    inputs.regex.value = pattern.regex;
+
+    inputs.key.value = null;
+    inputs.value.value = null;
+
+    queryParameters.length = 0;
+    queryParameters.push(...pattern.queryParameters);
+
+    refreshQueryParameters(queryParameters);
+  });
+});
+
+selects.queryParameters.addEventListener('click', (event) => {
+  const queryParameter = queryParameters.find((queryParameter) =>
+    queryParameter.key === event.toElement.innerHTML);
+
+  if (!queryParameter) {
+    return;
+  }
+
+  inputs.key.value = queryParameter.key;
+  inputs.value.value = queryParameter.value;
 });
 
 const queryParameters = [];
