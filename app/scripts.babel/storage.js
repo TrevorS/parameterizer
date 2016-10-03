@@ -1,5 +1,6 @@
 const KEYS = {
   patterns: 'patterns',
+  isActive: 'isActive',
 };
 
 class Storage {
@@ -15,11 +16,35 @@ class Storage {
         this.storageArea.set({ [KEYS.patterns]: [] });
       }
     });
+
+    this.isActive((isActive) => {
+      if (isActive === null || isActive === undefined || force) {
+        this.storageArea.set({ [KEYS.isActive]: true });
+      }
+    });
   }
 
   patterns(callback) {
     this.storageArea.get(KEYS.patterns, (details) => {
       callback(details[KEYS.patterns]);
+    });
+  }
+
+  isActive(callback) {
+    this.storageArea.get(KEYS.isActive, (details) => {
+      callback(details[KEYS.isActive]);
+    });
+  }
+
+  setActive(isActive, callback) {
+    this.storageArea.set({ [KEYS.isActive]: isActive }, () => {
+      callback(isActive);
+    });
+  }
+
+  toggleActive(callback) {
+    this.isActive((isActive) => {
+      this.setActive(!isActive, callback);
     });
   }
 

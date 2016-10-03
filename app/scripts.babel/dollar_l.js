@@ -8,12 +8,16 @@ class DollarL {
   }
 
   addOptionToSelect(select, textContent, value) {
-    const elm = this.document.createElement('option');
+    const elm = this.createElement('option');
 
     elm.textContent = textContent;
     elm.value = value;
 
     select.appendChild(elm);
+  }
+
+  createElement(tagName) {
+    return this.document.createElement(tagName);
   }
 
   refreshOptionsOnSelect(select, list, textField) {

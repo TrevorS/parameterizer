@@ -8,9 +8,13 @@ class Request {
     this.searchParams = this.url.searchParams;
   }
 
+  fromMainFrame() {
+    return this.request.type === MAIN_FRAME;
+  }
+
   matches(regex, params) {
     return this.url.href.match(new RegExp(regex)) &&
-           this.request.type === MAIN_FRAME &&
+           this.fromMainFrame() &&
            this.requiresModification(params);
   }
 
